@@ -139,4 +139,5 @@
 			</properties>
 		</profile>
 	</profiles>
+	<groupId>com.github.linggify.attic</groupId>
 </project>
