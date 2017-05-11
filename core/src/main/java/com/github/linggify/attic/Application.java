@@ -1,5 +1,6 @@
 package com.github.linggify.attic;
 
+import java.io.File;
 import java.util.Stack;
 
 import com.github.linggify.attic.View.ViewState;
@@ -54,10 +55,16 @@ public class Application {
 	/**
 	 * Launches this {@link Application}
 	 */
-	public void launch(View root) {
+	public void launch(ApplicationConfiguration config, View root) {
 		mBackend.init();
 
+		//setup window
 		mWindow = mBackend.createWindow();
+		mWindow.setIcon(config.getIcon());
+		mWindow.setTitle(config.getTitle());
+		mWindow.setDimensions(config.getWidth(), config.getHeight());
+		mWindow.setFullScreen(config.isFullscreen());
+		mWindow.enableVSync(config.isVSync());
 		mWindow.center();
 
 		// init renderer
@@ -101,7 +108,7 @@ public class Application {
 				throw new AtticRuntimeException("Cannot push NULL as a View");
 
 			ViewState next = new ViewState();
-			
+
 			// stop the current view
 			if (!mViewStack.isEmpty())
 				mViewStates.push(mViewStack.peek().stop(next));
@@ -145,12 +152,12 @@ public class Application {
 		mGenius.submitTask(() -> {
 			// pop last view
 			View last = mViewStack.pop();
-			
-			//get previous viewstate if any
+
+			// get previous viewstate if any
 			ViewState next = null;
-			if(!mViewStack.isEmpty())
+			if (!mViewStack.isEmpty())
 				next = mViewStates.pop();
-			
+
 			last.stop(next);
 
 			if (!mViewStack.isEmpty())
@@ -158,5 +165,114 @@ public class Application {
 			else
 				mWindow.setShouldClose(true);
 		});
+	}
+
+	/**
+	 * Used to pass basic information to the {@link Application} on startup
+	 * 
+	 * @author Freddy
+	 *
+	 */
+	public class ApplicationConfiguration {
+
+		private int mSizeX;
+		private int mSizeY;
+
+		private boolean mVSync;
+		private boolean mFullscreen;
+
+		private String mTitle;
+		private File mIcon;
+
+		/**
+		 * @return the width of the {@link Window}
+		 */
+		public int getWidth() {
+			return mSizeX;
+		}
+
+		/**
+		 * @param width
+		 *            the width of the {@link Window}
+		 */
+		public void setWidth(int width) {
+			this.mSizeX = width;
+		}
+
+		/**
+		 * @return the height of the {@link Window}
+		 */
+		public int getHeight() {
+			return mSizeY;
+		}
+
+		/**
+		 * @param height
+		 *            the height of the {@link Window}
+		 */
+		public void setHeight(int height) {
+			this.mSizeY = height;
+		}
+
+		/**
+		 * @return whether v-sync shall be enabled
+		 */
+		public boolean isVSync() {
+			return mVSync;
+		}
+
+		/**
+		 * @param mVSync
+		 *            whether v-sync shall be enabled
+		 */
+		public void setIsVSync(boolean vSync) {
+			this.mVSync = vSync;
+		}
+
+		/**
+		 * @return whether the {@link Application} is launched in fullscreen
+		 */
+		public boolean isFullscreen() {
+			return mFullscreen;
+		}
+
+		/**
+		 * @param flag
+		 *            whether to launch the {@link Application} in fullscreen
+		 */
+		public void setmFullscreen(boolean flag) {
+			this.mFullscreen = flag;
+		}
+
+		/**
+		 * @return the title
+		 */
+		public String getTitle() {
+			return mTitle;
+		}
+
+		/**
+		 * @param title
+		 *            the title to set
+		 */
+		public void setTitle(String title) {
+			this.mTitle = title;
+		}
+
+		/**
+		 * @return the Icon
+		 */
+		public File getIcon() {
+			return mIcon;
+		}
+
+		/**
+		 * @param icon
+		 *            the Icon to set
+		 */
+		public void setIcon(File icon) {
+			this.mIcon = icon;
+		}
+
 	}
 }
