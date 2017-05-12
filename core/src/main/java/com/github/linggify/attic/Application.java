@@ -173,7 +173,7 @@ public class Application {
 	 * @author Freddy
 	 *
 	 */
-	public class ApplicationConfiguration {
+	public static class ApplicationConfiguration {
 
 		private int mSizeX;
 		private int mSizeY;
@@ -184,6 +184,15 @@ public class Application {
 		private String mTitle;
 		private File mIcon;
 
+		public ApplicationConfiguration() {
+			mSizeX = 800;
+			mSizeY = 600;
+			mVSync = false;
+			mFullscreen = false;
+			mTitle = "Attic";
+			mIcon = null;
+		}
+		
 		/**
 		 * @return the width of the {@link Window}
 		 */
@@ -240,7 +249,7 @@ public class Application {
 		 * @param flag
 		 *            whether to launch the {@link Application} in fullscreen
 		 */
-		public void setmFullscreen(boolean flag) {
+		public void setFullscreen(boolean flag) {
 			this.mFullscreen = flag;
 		}
 
