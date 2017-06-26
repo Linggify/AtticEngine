@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.github.linggify.attic.Pair;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.render.Batch;
 import com.github.linggify.attic.render.Context;
 import com.github.linggify.attic.util.Matrix33;
+import com.github.linggify.attic.util.Pair;
 import com.github.linggify.attic.util.Vector2D;
 
 /**

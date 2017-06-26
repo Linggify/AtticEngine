@@ -157,7 +157,6 @@ public class TransformPropertyTests {
 		
 		TransformProperty property = new TransformProperty();
 		property.addListener(listener);
-		property.notifyChanged();
 		
 		verify(listener).onEvent(property, PropertyEvent.PROPERTY_CHANGED);
 	}
@@ -217,11 +216,11 @@ public class TransformPropertyTests {
 		PropertyListener listener = mock(PropertyListener.class);
 		TransformProperty property = new TransformProperty();
 		property.addListener(listener);
-		property.setActive(true);
-		verify(listener).onEvent(property, PropertyEvent.PROPERTY_ENABLED);
-		assertTrue(property.isActive());
 		property.setActive(false);
 		verify(listener).onEvent(property, PropertyEvent.PROPERTY_DISABLED);
 		assertFalse(property.isActive());
+		property.setActive(true);
+		verify(listener).onEvent(property, PropertyEvent.PROPERTY_ENABLED);
+		assertTrue(property.isActive());
 	}
 }

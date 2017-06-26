@@ -1,4 +1,4 @@
-package com.github.linggify.attic;
+package com.github.linggify.attic.util;
 
 /**
  * An immutable Pair of arbitrary values

@@ -23,9 +23,19 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>lwjgl</module>
     
-    <module>core</module>
-    <module>properties</module>
+    
+    
+    
+    
+    
+    
+    
+    
+    <module>nodes</module>
+    <module>../attictest</module>
+    <module>../core</module>
+    <module>../lwjgl</module>
+    <module>../properties</module>
   </modules>
 </project>

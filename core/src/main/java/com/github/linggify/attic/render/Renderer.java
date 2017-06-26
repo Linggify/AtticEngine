@@ -42,7 +42,7 @@ public class Renderer {
 	 * @param entity
 	 */
 	public void registerEntityForRendering(Entity entity) {
-		List<Property<RenderData>> properties = entity.getProperties(RenderData.class);
+		List<Property<RenderData>> properties = entity.propertiesByValue(RenderData.class);
 		for (Property<RenderData> property : properties) {
 			RenderData subject = property.get();
 

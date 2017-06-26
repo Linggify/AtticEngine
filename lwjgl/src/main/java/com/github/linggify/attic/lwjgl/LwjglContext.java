@@ -11,13 +11,13 @@ import java.util.Map;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryUtil;
 
-import com.github.linggify.attic.Pair;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.render.Batch;
 import com.github.linggify.attic.render.Context;
 import com.github.linggify.attic.render.Context.TextureFormat;
 import com.github.linggify.attic.util.Color;
 import com.github.linggify.attic.util.Matrix33;
+import com.github.linggify.attic.util.Pair;
 import com.github.linggify.attic.util.Vector2D;
 
 import static org.lwjgl.glfw.GLFW.*;

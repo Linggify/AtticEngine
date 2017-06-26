@@ -1,11 +1,7 @@
 package com.github.linggify.attic.properties;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Entity;
-import com.github.linggify.attic.logic.Property;
 import com.github.linggify.attic.util.Matrix33;
 import com.github.linggify.attic.util.Vector2D;
 
@@ -15,7 +11,7 @@ import com.github.linggify.attic.util.Vector2D;
  * @author Freddy
  *
  */
-public class TransformProperty implements Property<Matrix33> {
+public class TransformProperty extends BaseProperty<Matrix33> {
 
 	private float mRotation;
 	private float mScale;
@@ -27,11 +23,6 @@ public class TransformProperty implements Property<Matrix33> {
 	private TransformProperty mParentTransform;
 	private PropertyListener mParentListener;
 
-	private Set<PropertyListener> mListeners;
-
-	private Entity mParent;
-	private boolean mActive;
-
 	/**
 	 * Creates a new {@link TransformProperty} with the identy-matrix
 	 */
@@ -40,7 +31,6 @@ public class TransformProperty implements Property<Matrix33> {
 		mScale = 1.0f;
 		mRotation = 0.0f;
 		mTransform = new Matrix33();
-		mListeners = new HashSet<>();
 		mTmpMatrix = new Matrix33();
 
 		mParentListener = (t, e) -> {
@@ -159,54 +149,7 @@ public class TransformProperty implements Property<Matrix33> {
 	 * {@link TransformProperty} to notify its listeners.
 	 */
 	public void notifyChanged() {
-		for (PropertyListener listener : mListeners)
-			listener.onEvent(this, PropertyEvent.PROPERTY_CHANGED);
-	}
-
-	@Override
-	public void addListener(PropertyListener listener) {
-		if(listener == null)
-			throw new AtticRuntimeException("Listener cannot be null");
-		
-		mListeners.add(listener);
-	}
-
-	@Override
-	public boolean removeListener(PropertyListener listener) {
-		return mListeners.remove(mTransform);
-	}
-
-	@Override
-	public void onAttach(Entity parent) throws AtticRuntimeException {
-		if (mParent != null)
-			throw new AtticRuntimeException("Property is already attached to an Entity");
-
-		mParent = parent;
-		for (PropertyListener listener : mListeners)
-			listener.onEvent(this, PropertyEvent.PROPERTY_ADDED);
-	}
-
-	@Override
-	public void onDetach() throws AtticRuntimeException {
-		if (mParent == null)
-			throw new AtticRuntimeException("Property is not attached to an Entity");
-
-		mParent = null;
-		for (PropertyListener listener : mListeners)
-			listener.onEvent(this, PropertyEvent.PROPERTY_REMOVED);
-	}
-
-	@Override
-	public void setActive(boolean flag) {
-		mActive = flag;
-
-		for (PropertyListener listener : mListeners)
-			listener.onEvent(this, mActive ? PropertyEvent.PROPERTY_ENABLED : PropertyEvent.PROPERTY_DISABLED);
-	}
-
-	@Override
-	public boolean isActive() {
-		return mActive;
+		notifyListeners(PropertyEvent.PROPERTY_CHANGED);
 	}
 
 	@Override

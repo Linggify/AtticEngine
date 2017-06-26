@@ -82,7 +82,7 @@ public class Application {
 		mWindow.show();
 
 		while (!mWindow.shouldClose()) {
-			mContext.clearRenderTargets();
+			mRenderer.render();
 			mWindow.postRender();
 		}
 

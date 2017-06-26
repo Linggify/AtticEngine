@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.github.linggify.attic.Pair;
 import com.github.linggify.attic.logic.Property;
 import com.github.linggify.attic.logic.Property.PropertyEvent;
 import com.github.linggify.attic.logic.Property.PropertyListener;
@@ -16,6 +15,7 @@ import com.github.linggify.attic.lwjgl.LwjglVertexBuffer.BufferSegment;
 import com.github.linggify.attic.render.Batch;
 import com.github.linggify.attic.render.RenderData;
 import com.github.linggify.attic.render.RenderData.VertexData;
+import com.github.linggify.attic.util.Pair;
 import com.github.linggify.attic.render.Context;
 import com.github.linggify.attic.render.Context.VertexAttribute;
 
