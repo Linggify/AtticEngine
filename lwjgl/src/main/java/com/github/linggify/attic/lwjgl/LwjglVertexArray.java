@@ -1,8 +1,8 @@
 package com.github.linggify.attic.lwjgl;
 
 import com.github.linggify.attic.lwjgl.LwjglVertexBuffer.BufferSegment;
-import com.github.linggify.attic.render.Context;
-import com.github.linggify.attic.render.Context.VertexAttribute;
+import com.github.linggify.attic.render.IContext;
+import com.github.linggify.attic.render.IContext.VertexAttribute;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -82,7 +82,7 @@ public class LwjglVertexArray {
 	 * Binds this {@link LwjglVertexArray} for rendering and sets the VertexAttributes to the currently active shader
 	 * @param helper
 	 */
-	public void bind(Context helper) {
+	public void bind(IContext helper) {
 		glBindVertexArray(mArrayHandle);
 		for(int i = 0; i < mAttributes.length; i++) {
 			helper.setAttribute(mAttributes[i].attribute(), i);

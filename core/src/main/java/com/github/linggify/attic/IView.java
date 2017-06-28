@@ -10,19 +10,19 @@ import com.github.linggify.attic.logic.Genius;
  * @author Fredie
  *
  */
-public interface View {
+public interface IView {
 
 	/**
 	 * Sets up the scene using the given {@link Genius}
 	 * 
 	 * @param genius
 	 * @param state
-	 *            the state of this {@link View}
+	 *            the state of this {@link IView}
 	 */
 	public void setup(Application app, ViewState state);
 
 	/**
-	 * Pauses this {@link View}
+	 * Pauses this {@link IView}
 	 * 
 	 * @param last
 	 *            the {@link ViewState} of the View that is started next, to
@@ -33,7 +33,7 @@ public interface View {
 
 	/**
 	 * ViewStates are used by the {@link Application} to remember the state of a
-	 * {@link View} when it not currently active
+	 * {@link IView} when it not currently active
 	 * 
 	 * @author Fredie
 	 *

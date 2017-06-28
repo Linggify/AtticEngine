@@ -1,20 +1,20 @@
 package com.github.linggify.attic.render.path;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Context;
+import com.github.linggify.attic.render.IContext;
 
 /**
  * A Node is one step in a {@link RenderPath} it may have inputs and outputs
  * @author Fredie
  *
  */
-public interface Node {
+public interface INode {
 
 	/**
-	 * Sets the {@link Context} for this {@link Node}.
+	 * Sets the {@link IContext} for this {@link INode}.
 	 * @param helper
 	 */
-	public void setRenderHepler(Context helper);
+	public void setRenderHepler(IContext helper);
 
 	/**
 	 * Sets the input with the given name
@@ -24,7 +24,7 @@ public interface Node {
 	public void setInput(String name, Input input);
 	
 	/**
-	 * Prepares the {@link Node} for rendering a new frame,
+	 * Prepares the {@link INode} for rendering a new frame,
 	 * this includes resetting all cached outputs
 	 */
 	public void prepare();
@@ -45,7 +45,7 @@ public interface Node {
 	public <T> T getOutput(int index, Class<T> type) throws AtticRuntimeException;
 	
 	/**
-	 * Inputs are providing data for {@link Node}s
+	 * Inputs are providing data for {@link INode}s
 	 * @author Fredie
 	 *
 	 */

@@ -1,10 +1,10 @@
 package com.github.linggify.attictest;
 
 import com.github.linggify.attic.Application;
-import com.github.linggify.attic.View;
+import com.github.linggify.attic.IView;
 import com.github.linggify.attic.logic.Entity;
 
-public class TestView implements View{
+public class TestView implements IView{
 
 	@Override
 	public void setup(Application app, ViewState state) {

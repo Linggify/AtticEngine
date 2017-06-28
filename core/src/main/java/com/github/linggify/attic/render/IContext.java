@@ -14,7 +14,7 @@ import com.github.linggify.attic.util.Vector2D;
  * @author Fredie
  *
  */
-public interface Context {
+public interface IContext {
 	// GL Util
 
 	/**
@@ -412,26 +412,26 @@ public interface Context {
 	}
 
 	/**
-	 * Creates a new {@link Batch} on the graphics hardware
+	 * Creates a new {@link IBatch} on the graphics hardware
 	 * 
 	 * @param isStatic
 	 * @param attributes
 	 * @return the created batch or null if the creation failed
 	 */
-	public Batch genBatch(boolean isStatic, VertexAttribute... attributes);
+	public IBatch genBatch(boolean isStatic, VertexAttribute... attributes);
 
 	/**
-	 * Destroys the given {@link Batch} or does nothing if batch is null
+	 * Destroys the given {@link IBatch} or does nothing if batch is null
 	 * 
 	 * @param batch
 	 */
-	public void destroyBatch(Batch batch);
+	public void destroyBatch(IBatch batch);
 
 	/**
-	 * Renders the given {@link Batch} using the currently active shader
+	 * Renders the given {@link IBatch} using the currently active shader
 	 * 
 	 * @param batch
 	 * @return whether rendering the batch was successful or not
 	 */
-	public boolean renderBatch(Batch batch);
+	public boolean renderBatch(IBatch batch);
 }

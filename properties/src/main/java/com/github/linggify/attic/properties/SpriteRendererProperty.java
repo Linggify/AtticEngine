@@ -1,6 +1,6 @@
 package com.github.linggify.attic.properties;
 
-import com.github.linggify.attic.render.Context.VertexAttribute;
+import com.github.linggify.attic.render.IContext.VertexAttribute;
 import com.github.linggify.attic.render.RenderData;
 import com.github.linggify.attic.util.Color;
 import com.github.linggify.attic.util.Matrix33;

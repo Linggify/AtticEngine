@@ -4,22 +4,22 @@ import java.io.File;
 
 import org.lwjgl.glfw.GLFWVidMode;
 
-import com.github.linggify.attic.Window;
+import com.github.linggify.attic.IWindow;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Context;
+import com.github.linggify.attic.render.IContext;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The {@link Window} of the {@link LwjglBackend}
+ * The {@link IWindow} of the {@link LwjglBackend}
  * 
  * Destroys and re-creates itself if it is set to fullscreen or if changes to resizability are done
  * 
  * @author Fredie
  *
  */
-public class LwjglWindow implements Window {
+public class LwjglWindow implements IWindow {
 
 	private long mWindowHandle;
 	private long mMonitor;
@@ -153,7 +153,7 @@ public class LwjglWindow implements Window {
 	}
 	
 	@Override
-	public Context getContext() {
+	public IContext getContext() {
 		if(mContext == null) {
 			if(mWindowHandle == NULL) {
 				glfwDefaultWindowHints();

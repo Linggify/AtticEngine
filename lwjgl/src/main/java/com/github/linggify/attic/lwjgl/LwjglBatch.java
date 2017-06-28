@@ -8,16 +8,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.github.linggify.attic.logic.Property;
-import com.github.linggify.attic.logic.Property.PropertyEvent;
-import com.github.linggify.attic.logic.Property.PropertyListener;
+import com.github.linggify.attic.logic.IProperty;
+import com.github.linggify.attic.logic.IProperty.PropertyEvent;
+import com.github.linggify.attic.logic.IProperty.PropertyListener;
 import com.github.linggify.attic.lwjgl.LwjglVertexBuffer.BufferSegment;
-import com.github.linggify.attic.render.Batch;
+import com.github.linggify.attic.render.IBatch;
 import com.github.linggify.attic.render.RenderData;
 import com.github.linggify.attic.render.RenderData.VertexData;
 import com.github.linggify.attic.util.Pair;
-import com.github.linggify.attic.render.Context;
-import com.github.linggify.attic.render.Context.VertexAttribute;
+import com.github.linggify.attic.render.IContext;
+import com.github.linggify.attic.render.IContext.VertexAttribute;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -27,7 +27,7 @@ import static org.lwjgl.opengl.GL11.*;
  * @author Freddy
  *
  */
-public class LwjglBatch implements Batch {
+public class LwjglBatch implements IBatch {
 	
 	private List<Pair<BufferSegment, RenderData>> mProperties;
 	private List<Boolean> mActiveProperties;
@@ -126,7 +126,7 @@ public class LwjglBatch implements Batch {
 	 * shader
 	 * @param helper
 	 */
-	public void render(Context helper) {
+	public void render(IContext helper) {
 		packIndices();
 		mBuffer.bind(helper);
 		glDrawElements(GL_TRIANGLES, mHighIndex, GL_INT, 0);
@@ -147,7 +147,7 @@ public class LwjglBatch implements Batch {
 	}
 	
 	@Override
-	public boolean accept(Property<RenderData> property) {
+	public boolean accept(IProperty<RenderData> property) {
 		RenderData data = property.get();
 
 		// check if the renderdatas attributes match the batches attributes
@@ -176,7 +176,7 @@ public class LwjglBatch implements Batch {
 		final int id = preId;
 
 		property.addListener(new PropertyListener() {
-			public void onEvent(Property<?> p, PropertyEvent e) {
+			public void onEvent(IProperty<?> p, PropertyEvent e) {
 				switch (e) {
 				case PROPERTY_CHANGED:
 					if (mActiveProperties.get(id)) {

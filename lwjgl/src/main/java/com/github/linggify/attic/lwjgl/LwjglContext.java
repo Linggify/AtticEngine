@@ -12,9 +12,9 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryUtil;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Batch;
-import com.github.linggify.attic.render.Context;
-import com.github.linggify.attic.render.Context.TextureFormat;
+import com.github.linggify.attic.render.IBatch;
+import com.github.linggify.attic.render.IContext;
+import com.github.linggify.attic.render.IContext.TextureFormat;
 import com.github.linggify.attic.util.Color;
 import com.github.linggify.attic.util.Matrix33;
 import com.github.linggify.attic.util.Pair;
@@ -35,7 +35,7 @@ import static org.lwjgl.opengl.GL30.*;
  * @author Fredie
  *
  */
-public class LwjglContext implements Context {
+public class LwjglContext implements IContext {
 	
 	/**
 	 * All types of Resources
@@ -546,19 +546,19 @@ public class LwjglContext implements Context {
 	}
 
 	@Override
-	public Batch genBatch(boolean isStatic, VertexAttribute... attributes) {
+	public IBatch genBatch(boolean isStatic, VertexAttribute... attributes) {
 		// create a batch holding up to 2^16 vertices
 		return new LwjglBatch(65536, isStatic, attributes);
 	}
 
 	@Override
-	public void destroyBatch(Batch batch) {
+	public void destroyBatch(IBatch batch) {
 		LwjglBatch lbatch = (LwjglBatch) batch;
 		lbatch.destroy();
 	}
 
 	@Override
-	public boolean renderBatch(Batch batch) {
+	public boolean renderBatch(IBatch batch) {
 		LwjglBatch lbatch = (LwjglBatch) batch;
 		lbatch.render(this);
 		return true;
@@ -573,7 +573,7 @@ public class LwjglContext implements Context {
 	private class TextureData {
 
 		private int[] mDims;
-		private Context.TextureFormat mFormat;
+		private IContext.TextureFormat mFormat;
 		private byte[] mPixels;
 
 		/**
@@ -583,7 +583,7 @@ public class LwjglContext implements Context {
 		 * @param height
 		 * @param format
 		 */
-		TextureData(int width, int height, Context.TextureFormat format) {
+		TextureData(int width, int height, IContext.TextureFormat format) {
 			mDims = new int[] { width, height };
 			mFormat = format;
 			mPixels = null;
@@ -645,7 +645,7 @@ public class LwjglContext implements Context {
 		 * 
 		 * @return the {@link TextureFormat} of the texture
 		 */
-		Context.TextureFormat format() {
+		IContext.TextureFormat format() {
 			return mFormat;
 		}
 

@@ -50,12 +50,12 @@ public class Genius {
 	}
 
 	/**
-	 * Creates a new {@link Entity} with the given {@link Property}s
+	 * Creates a new {@link Entity} with the given {@link IProperty}s
 	 * 
 	 * @param properties
 	 * @return the newly created Entity
 	 */
-	public Entity createEntity(Property<?>... properties) {
+	public Entity createEntity(IProperty<?>... properties) {
 		Entity result = new Entity(this, properties);
 		submitTask(() -> {
 			mEntities.add(result);

@@ -5,15 +5,15 @@ import java.util.Set;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Entity;
-import com.github.linggify.attic.logic.Property;
+import com.github.linggify.attic.logic.IProperty;
 
 /**
- * A Base for all {@link Property}s containing basic functionality for lísteners
+ * A Base for all {@link IProperty}s containing basic functionality for lísteners
  * @author Fredie
  *
  * @param <T>
  */
-public abstract class BaseProperty<T> implements Property<T>{
+public abstract class BaseProperty<T> implements IProperty<T>{
 
 	private Entity mParent;
 	
@@ -34,7 +34,7 @@ public abstract class BaseProperty<T> implements Property<T>{
 	}
 	
 	/**
-	 * Calls all {@link PropertyListener} added to this {@link Property} with the given {@link PropertyEvent}
+	 * Calls all {@link PropertyListener} added to this {@link IProperty} with the given {@link PropertyEvent}
 	 * if the Property is active
 	 * 
 	 * @param event the PropertyEvent that happened
@@ -44,7 +44,7 @@ public abstract class BaseProperty<T> implements Property<T>{
 	}
 	
 	/**
-	 * Calls all {@link PropertyListener} added to this {@link Property} with the given {@link PropertyEvent}
+	 * Calls all {@link PropertyListener} added to this {@link IProperty} with the given {@link PropertyEvent}
 	 * if the Property is active or force is true
 	 * 
 	 * @param event the PropertyEvent that happened
@@ -59,7 +59,7 @@ public abstract class BaseProperty<T> implements Property<T>{
 	
 	/**
 	 * 
-	 * @return whether this {@link Property} has a parent or not
+	 * @return whether this {@link IProperty} has a parent or not
 	 */
 	protected boolean hasParent() {
 		return mParent != null;
@@ -67,7 +67,7 @@ public abstract class BaseProperty<T> implements Property<T>{
 	
 	/**
 	 * 
-	 * @return the current parent of the {@link Property} or null if it has no parent
+	 * @return the current parent of the {@link IProperty} or null if it has no parent
 	 */
 	protected Entity getParent() {
 		return mParent;

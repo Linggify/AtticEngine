@@ -2,9 +2,9 @@ package com.github.linggify.attictest;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Entity;
-import com.github.linggify.attic.logic.Property;
+import com.github.linggify.attic.logic.IProperty;
 
-public class TestProperty implements Property<Integer>{
+public class TestProperty implements IProperty<Integer>{
 
 	private Entity mParent;
 	private boolean mActive;

@@ -1,4 +1,4 @@
-package com.github.linggify.attic.render.path;
+package com.github.linggify.attic.nodes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,21 +6,24 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Batch;
-import com.github.linggify.attic.render.Context;
+import com.github.linggify.attic.render.IBatch;
+import com.github.linggify.attic.render.IContext;
+import com.github.linggify.attic.render.path.INode;
+import com.github.linggify.attic.render.path.RenderPath;
+import com.github.linggify.attic.render.path.INode.Input;
 import com.github.linggify.attic.util.Matrix33;
 import com.github.linggify.attic.util.Pair;
 import com.github.linggify.attic.util.Vector2D;
 
 /**
- * A RenderLayerNode is a {@link Node} that renders RenderData from a given Layer
+ * A RenderLayerNode is a {@link INode} that renders RenderData from a given Layer
  * to its output (a framebuffer if the Node is not the root of the {@link RenderPath})
  * @author Fredie
  *
  */
-public class RenderLayerNode implements Node{
+public class RenderLayerNode implements INode{
 
-	private Context mHelper;
+	private IContext mHelper;
 	
 	private Input mShader;
 	private Input mLayer;
@@ -52,7 +55,7 @@ public class RenderLayerNode implements Node{
 	}
 	
 	@Override
-	public void setRenderHepler(Context helper) {
+	public void setRenderHepler(IContext helper) {
 		mHelper = helper;
 	}
 
@@ -118,10 +121,10 @@ public class RenderLayerNode implements Node{
 			mHelper.bindRenderTarget(0, mTarget.getValue(Integer.class));
 			
 			//render frame
-			List<Batch> layer = mLayer.getValue(List.class);
+			List<IBatch> layer = mLayer.getValue(List.class);
 			
 			//render batch
-			for(Batch batch : layer)
+			for(IBatch batch : layer)
 				mHelper.renderBatch(batch);
 			
 			//unbind stuff

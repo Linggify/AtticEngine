@@ -1,7 +1,7 @@
 package com.github.linggify.attic.render.path;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.path.Node.Input;
+import com.github.linggify.attic.render.path.INode.Input;
 
 /**
  * A ValueInput is an {@link Input} holding a single value

@@ -4,9 +4,9 @@ import static org.lwjgl.glfw.GLFW.*;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 
-import com.github.linggify.attic.Backend;
-import com.github.linggify.attic.FileManager;
-import com.github.linggify.attic.Window;
+import com.github.linggify.attic.IBackend;
+import com.github.linggify.attic.IFileManager;
+import com.github.linggify.attic.IWindow;
 
 /**
  * LwjglBackend is the provider for all Lwjgl specific interfaces
@@ -14,7 +14,7 @@ import com.github.linggify.attic.Window;
  * @author Freddy
  *
  */
-public class LwjglBackend implements Backend {
+public class LwjglBackend implements IBackend {
 
 	private LwjglFileManager mFileManager;
 	
@@ -26,7 +26,7 @@ public class LwjglBackend implements Backend {
 	}
 	
 	@Override
-	public Window createWindow() {
+	public IWindow createWindow() {
 		return new LwjglWindow();
 	}
 
@@ -44,7 +44,7 @@ public class LwjglBackend implements Backend {
 	}
 
 	@Override
-	public FileManager getFileManager() {
+	public IFileManager getFileManager() {
 		return mFileManager;
 	}
 }

@@ -3,10 +3,10 @@ package com.github.linggify.attic;
 import java.io.File;
 import java.util.Stack;
 
-import com.github.linggify.attic.View.ViewState;
+import com.github.linggify.attic.IView.ViewState;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Genius;
-import com.github.linggify.attic.render.Context;
+import com.github.linggify.attic.render.IContext;
 import com.github.linggify.attic.render.Renderer;
 
 /**
@@ -17,22 +17,22 @@ import com.github.linggify.attic.render.Renderer;
  */
 public class Application {
 
-	private Backend mBackend;
+	private IBackend mBackend;
 
-	private Window mWindow;
+	private IWindow mWindow;
 
 	private Genius mGenius;
-	private Stack<View> mViewStack;
+	private Stack<IView> mViewStack;
 	private Stack<ViewState> mViewStates;
 	private Renderer mRenderer;
-	private Context mContext;
+	private IContext mContext;
 
 	/**
-	 * Creates a new {@link Application} using the given {@link Backend}
+	 * Creates a new {@link Application} using the given {@link IBackend}
 	 * 
 	 * @param backend
 	 */
-	public Application(Backend backend) {
+	public Application(IBackend backend) {
 		mBackend = backend;
 	}
 
@@ -55,7 +55,7 @@ public class Application {
 	/**
 	 * Launches this {@link Application}
 	 */
-	public void launch(ApplicationConfiguration config, View root) {
+	public void launch(ApplicationConfiguration config, IView root) {
 		mBackend.init();
 
 		//setup window
@@ -98,11 +98,11 @@ public class Application {
 	}
 
 	/**
-	 * Pushes the given {@link View} on top of the View-stack
+	 * Pushes the given {@link IView} on top of the View-stack
 	 * 
 	 * @param view
 	 */
-	public void pushView(View view) {
+	public void pushView(IView view) {
 		mGenius.submitTask(() -> {
 			if (view == null)
 				throw new AtticRuntimeException("Cannot push NULL as a View");
@@ -120,12 +120,12 @@ public class Application {
 	}
 
 	/**
-	 * Pops the previous {@link View} (if any) and pushes the given View
+	 * Pops the previous {@link IView} (if any) and pushes the given View
 	 * 
 	 * @param view
 	 *            the View to start next
 	 */
-	public void switchView(View view) {
+	public void switchView(IView view) {
 		mGenius.submitTask(() -> {
 			if (view == null)
 				throw new AtticRuntimeException("Cannot switch to a View that is NULL");
@@ -133,7 +133,7 @@ public class Application {
 			ViewState next = new ViewState();
 			// pop last view
 			if (!mViewStack.isEmpty()) {
-				View last = mViewStack.pop();
+				IView last = mViewStack.pop();
 				last.stop(next);
 			}
 
@@ -144,14 +144,14 @@ public class Application {
 	}
 
 	/**
-	 * Stops the currently running {@link View} from the stack and starts the
+	 * Stops the currently running {@link IView} from the stack and starts the
 	 * next lower one with the last {@link ViewState} it had. If there is no
 	 * View left in the Stack, the {@link Application} will stop running
 	 */
 	public void popView() {
 		mGenius.submitTask(() -> {
 			// pop last view
-			View last = mViewStack.pop();
+			IView last = mViewStack.pop();
 
 			// get previous viewstate if any
 			ViewState next = null;
@@ -194,7 +194,7 @@ public class Application {
 		}
 		
 		/**
-		 * @return the width of the {@link Window}
+		 * @return the width of the {@link IWindow}
 		 */
 		public int getWidth() {
 			return mSizeX;
@@ -202,14 +202,14 @@ public class Application {
 
 		/**
 		 * @param width
-		 *            the width of the {@link Window}
+		 *            the width of the {@link IWindow}
 		 */
 		public void setWidth(int width) {
 			this.mSizeX = width;
 		}
 
 		/**
-		 * @return the height of the {@link Window}
+		 * @return the height of the {@link IWindow}
 		 */
 		public int getHeight() {
 			return mSizeY;
@@ -217,7 +217,7 @@ public class Application {
 
 		/**
 		 * @param height
-		 *            the height of the {@link Window}
+		 *            the height of the {@link IWindow}
 		 */
 		public void setHeight(int height) {
 			this.mSizeY = height;

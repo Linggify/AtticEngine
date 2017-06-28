@@ -5,27 +5,27 @@ package com.github.linggify.attic;
  * @author Fredie
  *
  */
-public interface Backend {
+public interface IBackend {
 
 	/**
-	 * Initializes the {@link Backend}
+	 * Initializes the {@link IBackend}
 	 */
 	public void init();
 	
 	/**
-	 * Destroys all resources used by this {@link Backend} making it unusable
+	 * Destroys all resources used by this {@link IBackend} making it unusable
 	 */
 	public void destroy();
 	
 	/**
 	 * 
-	 * @return a {@link FileManager} to interface with the local file-system
+	 * @return a {@link IFileManager} to interface with the local file-system
 	 */
-	public FileManager getFileManager();
+	public IFileManager getFileManager();
 	
 	/**
-	 * Creates a new {@link Window} on the current Thread
+	 * Creates a new {@link IWindow} on the current Thread
 	 * @return the Window or <code>null</code> if creation has failed
 	 */
-	public Window createWindow();
+	public IWindow createWindow();
 }

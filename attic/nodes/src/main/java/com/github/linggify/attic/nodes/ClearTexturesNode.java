@@ -3,19 +3,19 @@ package com.github.linggify.attic.nodes;
 import java.util.ArrayList;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Context;
-import com.github.linggify.attic.render.path.Node;
+import com.github.linggify.attic.render.IContext;
+import com.github.linggify.attic.render.path.INode;
 
 /**
  * A Node used to clear all Textures connected to its inputs
  * @author Freddy
  *
  */
-public class ClearTexturesNode implements Node{
+public class ClearTexturesNode implements INode{
 
 	public static final String TEXTURE_LINK = "texture_";
 	
-	private Context mContext;
+	private IContext mContext;
 	
 	private boolean mCleared;
 	
@@ -29,7 +29,7 @@ public class ClearTexturesNode implements Node{
 	}
 	
 	@Override
-	public void setRenderHepler(Context helper) {
+	public void setRenderHepler(IContext helper) {
 		mContext = helper;
 	}
 

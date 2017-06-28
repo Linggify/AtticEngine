@@ -11,7 +11,7 @@ import com.github.linggify.attic.exceptions.AtticRuntimeException;
  * @author Freddy
  *
  */
-public interface FileManager {
+public interface IFileManager {
 
 	/**
 	 * 

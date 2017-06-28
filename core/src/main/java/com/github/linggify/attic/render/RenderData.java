@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.github.linggify.attic.render.Context.VertexAttribute;
+import com.github.linggify.attic.render.IContext.VertexAttribute;
 import com.github.linggify.attic.util.Matrix33;
 
 /**

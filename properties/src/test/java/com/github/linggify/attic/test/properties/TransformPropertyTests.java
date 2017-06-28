@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Entity;
-import com.github.linggify.attic.logic.Property.PropertyEvent;
-import com.github.linggify.attic.logic.Property.PropertyListener;
+import com.github.linggify.attic.logic.IProperty.PropertyEvent;
+import com.github.linggify.attic.logic.IProperty.PropertyListener;
 import com.github.linggify.attic.properties.TransformProperty;
 import com.github.linggify.attic.util.Matrix33;
 import com.github.linggify.attic.util.Vector2D;

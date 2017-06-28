@@ -1,6 +1,6 @@
 package com.github.linggify.attic.render;
 
-import com.github.linggify.attic.logic.Property;
+import com.github.linggify.attic.logic.IProperty;
 
 /**
  * Batches are groups of geometry batched together to reduce driver overhead when rendering.
@@ -11,12 +11,12 @@ import com.github.linggify.attic.logic.Property;
  * @author Fredie
  *
  */
-public interface Batch {
+public interface IBatch {
 	
 	/**
-	 * Tries to add the given {@link Property} to this {@link Batch} for rendering
+	 * Tries to add the given {@link IProperty} to this {@link IBatch} for rendering
 	 * @param property
 	 * @return true if the given Property was accepted
 	 */
-	public boolean accept(Property<RenderData> property);
+	public boolean accept(IProperty<RenderData> property);
 }

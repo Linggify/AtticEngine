@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.Context;
+import com.github.linggify.attic.render.IContext;
 import com.github.linggify.attic.render.Renderer;
 
 /**
@@ -15,13 +15,13 @@ import com.github.linggify.attic.render.Renderer;
  */
 public class RenderPath {
 
-	private List<Node> mNodes;
-	private Node mRoot;
+	private List<INode> mNodes;
+	private INode mRoot;
 	private int mOutput;
-	private Context mRenderHelper;
+	private IContext mRenderHelper;
 
 	/**
-	 * Creates a new {@link RenderPath} with the given list of {@link Node}s
+	 * Creates a new {@link RenderPath} with the given list of {@link INode}s
 	 * 
 	 * @param root
 	 *            the node providing the output for the screen
@@ -29,25 +29,25 @@ public class RenderPath {
 	 *            the name of the output
 	 * @param nodes
 	 */
-	public RenderPath(Node root, String outputName, Node... nodes) {
+	public RenderPath(INode root, String outputName, INode... nodes) {
 		mNodes = Arrays.asList(nodes);
 		mRoot = root;
 		mOutput = mRoot.getOutputId(outputName);
 	}
 
 	/**
-	 * Sets the {@link Context} used by this {@link RenderPath}
+	 * Sets the {@link IContext} used by this {@link RenderPath}
 	 * @param helper
 	 */
-	public void setRenderHelper(Context helper) {
+	public void setRenderHelper(IContext helper) {
 		mRenderHelper = helper;
 	}
 	
 	/**
-	 * Resets all cached outputs of any {@link Node}s in this {@link RenderPath}
+	 * Resets all cached outputs of any {@link INode}s in this {@link RenderPath}
 	 */
 	public void prepare() {
-		for (Node node : mNodes)
+		for (INode node : mNodes)
 			node.prepare();
 	}
 

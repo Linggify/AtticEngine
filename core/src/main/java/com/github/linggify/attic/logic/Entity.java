@@ -7,22 +7,22 @@ import java.util.Set;
 
 /**
  * Entities are used to represent all objects in a scene.
- * They contain {@link Property}s that define their behavior
+ * They contain {@link IProperty}s that define their behavior
  * @author Fredie
  *
  */
 public class Entity {
 
-	private List<Property<?>> mProperties;
+	private List<IProperty<?>> mProperties;
 	private Set<Class<?>> mPropertyTypes;
 	private final Genius mGenius;
 	private boolean mDead = false;
 	
 	/**
-	 * Creates a new {@link Entity} with the given {@link Property}s
+	 * Creates a new {@link Entity} with the given {@link IProperty}s
 	 * @param properties
 	 */
-	public Entity(Genius genius, Property<?>...properties) {
+	public Entity(Genius genius, IProperty<?>...properties) {
 		mProperties = new ArrayList<>();
 		addProperties(properties);
 		mGenius = genius;
@@ -38,11 +38,11 @@ public class Entity {
 	
 	/**
 	 * <blockquote><strong>this method should only be called by the {@link Genius}</strong></blockquote>
-	 * Kills this {@link Entity} thereby stripping it of all its {@link Property}s
+	 * Kills this {@link Entity} thereby stripping it of all its {@link IProperty}s
 	 * and thus making it unusable.
 	 */
 	public void kill() {
-		for(Property<?> property : mProperties) property.onDetach();
+		for(IProperty<?> property : mProperties) property.onDetach();
 		mProperties.clear();
 	}
 	
@@ -62,27 +62,27 @@ public class Entity {
 	}
 	
 	/**
-	 * Adds all the given {@link Property}s to this {@link Entity}
+	 * Adds all the given {@link IProperty}s to this {@link Entity}
 	 * @param properties
 	 */
-	public void addProperties(Property<?>...properties) {
+	public void addProperties(IProperty<?>...properties) {
 		mProperties.addAll(Arrays.asList(properties));
-		for(Property<?> property : properties) property.onAttach(this);
+		for(IProperty<?> property : properties) property.onAttach(this);
 	}
 	
 	/**
 	 * 
 	 * @param type
-	 * @return the {@link Property} of the given type, or null if none exists
+	 * @return the {@link IProperty} of the given type, or null if none exists
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Property<?>> T propertyByType(Class<T> type) {
+	public <T extends IProperty<?>> T propertyByType(Class<T> type) {
 		//if no property of the given type exists, return nothing
 		if(!mPropertyTypes.contains(type))
 			return null;
 		
 		//search for the property
-		for(Property<?> property : mProperties) {
+		for(IProperty<?> property : mProperties) {
 			if(property.getClass() == type)
 				return (T) property;
 		}
@@ -92,15 +92,15 @@ public class Entity {
 	}
 	
 	/**
-	 * Finds all {@link Property}s containing the given type contained by this {@link Entity}
+	 * Finds all {@link IProperty}s containing the given type contained by this {@link Entity}
 	 * @param type
 	 * @return a List of all Properties of the given type
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> List<Property<T>> propertiesByValue(Class<T> type) {
-		List<Property<T>> result = new ArrayList<>();
-		for(Property<?> property : mProperties) {
-			if(property.getContentType() == type) result.add((Property<T>) property);
+	public <T> List<IProperty<T>> propertiesByValue(Class<T> type) {
+		List<IProperty<T>> result = new ArrayList<>();
+		for(IProperty<?> property : mProperties) {
+			if(property.getContentType() == type) result.add((IProperty<T>) property);
 		}
 		
 		return result;
@@ -109,9 +109,9 @@ public class Entity {
 	/**
 	 * 
 	 * @param property
-	 * @return true if the {@link Property} was removed, false otherwise
+	 * @return true if the {@link IProperty} was removed, false otherwise
 	 */
-	public boolean removeProperty(Property<?> property) {
+	public boolean removeProperty(IProperty<?> property) {
 		boolean result = mProperties.remove(property);
 		if(result) property.onDetach();
 		
@@ -123,7 +123,7 @@ public class Entity {
 	 * @param delta the time since the last update
 	 */
 	public void update(double delta) {
-		for(Property<?> property : mProperties) {
+		for(IProperty<?> property : mProperties) {
 			property.update(delta);
 		}
 	}

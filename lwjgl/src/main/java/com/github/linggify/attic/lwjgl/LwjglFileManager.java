@@ -13,16 +13,16 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.github.linggify.attic.FileManager;
+import com.github.linggify.attic.IFileManager;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 
 /**
- * LwjglFileManager is a {@link FileManager} on the Lwjgl-platform
+ * LwjglFileManager is a {@link IFileManager} on the Lwjgl-platform
  * 
  * @author Freddy
  *
  */
-public class LwjglFileManager implements FileManager {
+public class LwjglFileManager implements IFileManager {
 
 	private Path mLocalRoot;
 	

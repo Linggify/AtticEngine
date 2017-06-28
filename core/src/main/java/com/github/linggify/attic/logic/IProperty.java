@@ -8,54 +8,54 @@ import com.github.linggify.attic.exceptions.AtticRuntimeException;
  * @author Fredie
  *
  */
-public interface Property<T> {
+public interface IProperty<T> {
 
 	/**
-	 * Adds a {@link PropertyListener} to this {@link Property}
+	 * Adds a {@link PropertyListener} to this {@link IProperty}
 	 * @param listener
 	 */
 	public void addListener(PropertyListener listener);
 	
 	/**
-	 * Removes the given {@link PropertyListener} from this {@link Property}
+	 * Removes the given {@link PropertyListener} from this {@link IProperty}
 	 * @param listener
 	 * @return whether the listener was successfully removed or not
 	 */
 	public boolean removeListener(PropertyListener listener);
 	
 	/**
-	 * Called when this {@link Property} is attached to an Entity
+	 * Called when this {@link IProperty} is attached to an Entity
 	 * @param parent
-	 * @throws AtticRuntimeException when this {@link Property} is already attached to a different parent
+	 * @throws AtticRuntimeException when this {@link IProperty} is already attached to a different parent
 	 */
 	public void onAttach(Entity parent) throws AtticRuntimeException;
 	
 	/**
-	 * Called when this {@link Property} is detached from its current parent
-	 * @throws AtticRuntimeException when the {@link Property} has not yet been attached to a parent
+	 * Called when this {@link IProperty} is detached from its current parent
+	 * @throws AtticRuntimeException when the {@link IProperty} has not yet been attached to a parent
 	 */
 	public void onDetach() throws AtticRuntimeException;
 	
 	/**
-	 * Sets whether this {@link Property} is active
+	 * Sets whether this {@link IProperty} is active
 	 * @param flag
 	 */
 	public void setActive(boolean flag);
 	
 	/**
 	 * 
-	 * @return whether this {@link Property} is active
+	 * @return whether this {@link IProperty} is active
 	 */
 	public boolean isActive();
 	
 	/**
 	 * 
-	 * @return the type the value of this {@link Property} is
+	 * @return the type the value of this {@link IProperty} is
 	 */
 	public Class<T> getContentType();
 	
 	/**
-	 * Updates the value of this {@link Property}
+	 * Updates the value of this {@link IProperty}
 	 * 
 	 * @param delta
 	 *            the time since the last update
@@ -64,7 +64,7 @@ public interface Property<T> {
 
 	/**
 	 * 
-	 * @return the current value of this {@link Property}
+	 * @return the current value of this {@link IProperty}
 	 */
 	public T get();
 
@@ -89,17 +89,17 @@ public interface Property<T> {
 	}
 	
 	/**
-	 * PropertyListeners are used to listen to {@link PropertyEvent}s fired by {@link Property}s
+	 * PropertyListeners are used to listen to {@link PropertyEvent}s fired by {@link IProperty}s
 	 * @author Fredie
 	 *
 	 */
 	public interface PropertyListener {
 		
 		/**
-		 * Called when a {@link Property} this {@link PropertyListener} listens to changes in some way
+		 * Called when a {@link IProperty} this {@link PropertyListener} listens to changes in some way
 		 * @param target
 		 * @param event
 		 */
-		public void onEvent(Property<?> target, PropertyEvent event);
+		public void onEvent(IProperty<?> target, PropertyEvent event);
 	}
 }
