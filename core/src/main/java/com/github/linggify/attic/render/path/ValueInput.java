@@ -9,7 +9,7 @@ import com.github.linggify.attic.render.path.INode.Input;
  *
  * @param <T>
  */
-public class ValueInput<T> implements Input{
+public class ValueInput<T> implements Input {
 
 	private T mValue;
 	

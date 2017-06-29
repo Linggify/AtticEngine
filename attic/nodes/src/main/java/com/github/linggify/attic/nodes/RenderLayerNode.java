@@ -10,7 +10,6 @@ import com.github.linggify.attic.render.IBatch;
 import com.github.linggify.attic.render.IContext;
 import com.github.linggify.attic.render.path.INode;
 import com.github.linggify.attic.render.path.RenderPath;
-import com.github.linggify.attic.render.path.INode.Input;
 import com.github.linggify.attic.util.Matrix33;
 import com.github.linggify.attic.util.Pair;
 import com.github.linggify.attic.util.Vector2D;
@@ -118,7 +117,10 @@ public class RenderLayerNode implements INode{
 			}
 			
 			//bind render target
-			mHelper.bindRenderTarget(0, mTarget.getValue(Integer.class));
+			int target = mTarget.getValue(Integer.class);
+			if(target > 0) {
+				mHelper.bindRenderTarget(0, target);
+			}
 			
 			//render frame
 			List<IBatch> layer = mLayer.getValue(List.class);
@@ -128,7 +130,9 @@ public class RenderLayerNode implements INode{
 				mHelper.renderBatch(batch);
 			
 			//unbind stuff
-			mHelper.unbindRenderTarget(0);
+			if(target > 0) {
+				mHelper.unbindRenderTarget(0);
+			}
 			mHelper.unbindShader();
 			
 			//remember not to render this node again in this frame

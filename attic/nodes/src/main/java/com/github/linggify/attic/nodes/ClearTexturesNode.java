@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.render.IContext;
 import com.github.linggify.attic.render.path.INode;
+import com.github.linggify.attic.util.Color;
+import com.github.linggify.attic.util.Pair;
 
 /**
  * A Node used to clear all Textures connected to its inputs
@@ -14,12 +16,13 @@ import com.github.linggify.attic.render.path.INode;
 public class ClearTexturesNode implements INode{
 
 	public static final String TEXTURE_LINK = "texture_";
+	public static final String COLOR_LINK = "color_";
 	
 	private IContext mContext;
 	
 	private boolean mCleared;
 	
-	private ArrayList<Input> mTargets;
+	private ArrayList<Pair<Input, Input>> mTargets;
 	
 	/**
 	 * Creates a new {@link ClearTexturesNode}
@@ -38,7 +41,21 @@ public class ClearTexturesNode implements INode{
 		if(name.startsWith(TEXTURE_LINK)) {
 			int id = Integer.parseInt(name.split("_")[1]);
 			while(id >= mTargets.size()) mTargets.add(null);
-			mTargets.set(id, input);
+			
+			if(mTargets.get(id) != null) {
+				mTargets.set(id, new Pair<>(input, mTargets.get(id).getValue()));
+			} else {
+				mTargets.set(id, new Pair<>(input, null));
+			}
+		} else if(name.startsWith(COLOR_LINK)) {
+			int id = Integer.parseInt(name.split("_")[1]);
+			while(id >= mTargets.size()) mTargets.add(null);
+			
+			if(mTargets.get(id) != null) {
+				mTargets.set(id, new Pair<>(mTargets.get(id).getValue(), input));
+			} else {
+				mTargets.set(id, new Pair<>(null, input));
+			}
 		}
 	}
 
@@ -63,8 +80,13 @@ public class ClearTexturesNode implements INode{
 			while(count < mTargets.size()) {
 				int tmpCount = count;
 				for(int i = 0; i < maxTargets && count < mTargets.size(); i++, count++) {
-					if(mTargets.get(count) != null)
-						mContext.bindRenderTarget(i, mTargets.get(count).getValue(Integer.class));
+					if(mTargets.get(count) != null) {
+						Pair<Input, Input> element = mTargets.get(count);
+						if(element.getKey() != null && element.getValue() != null) {
+							mContext.bindRenderTarget(i, element.getKey().getValue(Integer.class));
+							mContext.setClearColor(i, element.getValue().getValue(Color.class));
+						}
+					}
 				}
 				mContext.clearRenderTargets();
 				for(int i = tmpCount; i < count; i++) {
@@ -73,7 +95,10 @@ public class ClearTexturesNode implements INode{
 			}
 		}
 		
-		return mTargets.get(index).getValue(type);
+		if(mTargets.get(index) == null || mTargets.get(index).getKey() == null)
+			throw new AtticRuntimeException("The index " + index + " is not a valid output");
+			
+		return mTargets.get(index).getKey().getValue(type);
 	}
 
 }

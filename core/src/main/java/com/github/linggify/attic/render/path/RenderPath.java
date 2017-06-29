@@ -41,6 +41,8 @@ public class RenderPath {
 	 */
 	public void setRenderHelper(IContext helper) {
 		mRenderHelper = helper;
+		for (INode node : mNodes)
+			node.setRenderHepler(helper);
 	}
 	
 	/**

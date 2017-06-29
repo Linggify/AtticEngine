@@ -125,5 +125,6 @@ public class Renderer {
 	 */
 	public void setRenderPath(RenderPath path) {
 		mRenderPath = path;
+		path.setRenderHelper(mHelper);
 	}
 }

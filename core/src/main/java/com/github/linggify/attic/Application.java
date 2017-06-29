@@ -81,9 +81,14 @@ public class Application {
 
 		mWindow.show();
 
-		while (!mWindow.shouldClose()) {
-			mRenderer.render();
-			mWindow.postRender();
+		//if an exception arises during rendering, stop the application and print the log
+		try {
+			while (!mWindow.shouldClose()) {
+				mRenderer.render();
+				mWindow.postRender();
+			}
+		} catch (AtticRuntimeException e) {
+			e.printStackTrace();
 		}
 
 		// stop genius

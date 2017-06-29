@@ -98,7 +98,10 @@ public class LwjglContext implements IContext {
 		mResources.add(null);
 
 		// create framebuffer
-		mActiveRenderTargets = new int[glGetIntegeri(GL_MAX_COLOR_ATTACHMENTS, 0)];
+		int[] res = new int[1];
+		glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, res);
+		mActiveRenderTargets = new int[res[0]];
+		
 		mFramebufferHandle = glGenFramebuffers();
 		if (mFramebufferHandle == 0)
 			throw new AtticRuntimeException("Could not create framebuffer");

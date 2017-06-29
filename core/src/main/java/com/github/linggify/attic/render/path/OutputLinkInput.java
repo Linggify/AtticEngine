@@ -8,7 +8,7 @@ import com.github.linggify.attic.render.path.INode.Input;
  * @author Fredie
  *
  */
-public class OutputLinkInput implements Input{
+public class OutputLinkInput implements Input {
 
 	private INode mTarget;
 	private int mOutput;
