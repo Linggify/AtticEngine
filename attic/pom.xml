@@ -33,9 +33,9 @@
     
     
     <module>nodes</module>
-    <module>../attictest</module>
-    <module>../core</module>
-    <module>../lwjgl</module>
-    <module>../properties</module>
+    <module>attictest</module>
+    <module>core</module>
+    <module>lwjgl</module>
+    <module>properties</module>
   </modules>
 </project>
