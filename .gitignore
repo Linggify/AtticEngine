@@ -19,6 +19,9 @@ repo/
 # # Excel Backup File
 *.xlk
 
+#intelliJ
+.idea
+
 # Eclipse
 .metadata/
 .recommenders/
