@@ -20,7 +20,8 @@ repo/
 *.xlk
 
 #intelliJ
-.idea
+.idea/
+.iml
 
 # Eclipse
 .metadata/
