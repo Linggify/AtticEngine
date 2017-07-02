@@ -23,7 +23,7 @@ public class Renderer {
 	private RenderPath mRenderPath;
 
 	private HashMap<String, List<IBatch>> mScene;
-	private HashMap<String, INode.Input> mGlobals;
+	private HashMap<String, INode.IInput> mGlobals;
 
 	/**
 	 * Creates a new {@link Renderer} using the given {@link IContext}
@@ -108,7 +108,7 @@ public class Renderer {
 	 * 
 	 * @return the {@link IContext} currently used by this {@link Renderer}
 	 */
-	public IContext getHelper() {
+	public IContext context() {
 		return mHelper;
 	}
 	

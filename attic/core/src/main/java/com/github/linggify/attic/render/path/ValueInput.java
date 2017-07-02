@@ -1,15 +1,15 @@
 package com.github.linggify.attic.render.path;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.path.INode.Input;
+import com.github.linggify.attic.render.path.INode.IInput;
 
 /**
- * A ValueInput is an {@link Input} holding a single value
+ * A ValueInput is an {@link IInput} holding a single value
  * @author Fredie
  *
  * @param <T>
  */
-public class ValueInput<T> implements Input {
+public class ValueInput<T> implements IInput {
 
 	private T mValue;
 	

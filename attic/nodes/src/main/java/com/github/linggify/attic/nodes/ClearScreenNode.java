@@ -17,7 +17,7 @@ public class ClearScreenNode implements INode{
 	private IContext mContext;
 	private boolean mCleared;
 	
-	private Input mColor;
+	private IInput mColor;
 	
 	@Override
 	public void setRenderHepler(IContext helper) {
@@ -25,7 +25,7 @@ public class ClearScreenNode implements INode{
 	}
 
 	@Override
-	public void setInput(String name, Input input) {
+	public void setInput(String name, IInput input) {
 		if(name.equals(CLEAR_COLOR)) mColor = input;
 		else throw new AtticRuntimeException(name + " is not a valid input");
 	}

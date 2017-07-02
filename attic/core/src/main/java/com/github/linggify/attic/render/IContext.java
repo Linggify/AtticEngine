@@ -22,19 +22,19 @@ public interface IContext {
 	 * 
 	 * @return the current log of the underlying graphicspipeline
 	 */
-	public String getLog();
+	String getLog();
 
 	/**
 	 * 
 	 * @return how many rendertargets are allowed on the graphics hardware
 	 */
-	public int getMaxRenderTargets();
+	int getMaxRenderTargets();
 
 	/**
 	 * Clears all currently bound rendertargets, if none is bound, the default
 	 * framebuffer is cleared
 	 */
-	public void clearRenderTargets();
+	void clearRenderTargets();
 
 	/**
 	 * Sets the clear color for a given rendertarget. the maximum accepted for
@@ -45,7 +45,7 @@ public interface IContext {
 	 * @param target
 	 * @param color
 	 */
-	public void setClearColor(int target, Color color);
+	void setClearColor(int target, Color color);
 
 	// Textures
 
@@ -55,7 +55,7 @@ public interface IContext {
 	 * @author Fredie
 	 *
 	 */
-	public enum TextureFormat {
+	enum TextureFormat {
 		/** 3 color channels, 8 bit per channel */
 		RGB_888,
 		/** 3 color channels, 1 transparency channel, 8 bit per channel */
@@ -72,7 +72,7 @@ public interface IContext {
 	 * @author Freddy
 	 *
 	 */
-	public enum TextureFilter {
+	enum TextureFilter {
 		/** the nearest pixel to a given texture-coordinate is chosen */
 		NEAREST,
 		/** interpolates between pixels, based on a given texture-coordinate */
@@ -85,7 +85,7 @@ public interface IContext {
 	 * @return the handle of this texture or 0 if the generation of a texture
 	 *         failed
 	 */
-	public int newTexture();
+	int newTexture();
 
 	/**
 	 * Destroys the given texture or does nothing if no texture with the given
@@ -93,7 +93,7 @@ public interface IContext {
 	 * 
 	 * @param handle
 	 */
-	public void destroyTexture(int handle);
+	void destroyTexture(int handle);
 
 	/**
 	 * Sets the Pixeldata for the given texture
@@ -101,7 +101,7 @@ public interface IContext {
 	 * @param handle
 	 * @param data
 	 */
-	public void setPixelData(int handle, int width, int height, TextureFormat format, byte[] data);
+	void setPixelData(int handle, int width, int height, TextureFormat format, byte[] data);
 
 	/**
 	 * Sets the texture-filters for a given texture
@@ -109,7 +109,7 @@ public interface IContext {
 	 * @param minFilter
 	 * @param magFilter
 	 */
-	public void setTextureFilter(int handle, TextureFilter minFilter, TextureFilter magFilter);
+	void setTextureFilter(int handle, TextureFilter minFilter, TextureFilter magFilter);
 
 	/**
 	 * Binds the given texture to the given texture unit
@@ -118,7 +118,7 @@ public interface IContext {
 	 * @param handle
 	 * @return whether the bind was successful or not
 	 */
-	public boolean bindTexture(int unit, int handle);
+	boolean bindTexture(int unit, int handle);
 
 	/**
 	 * Unbinds any texture bound to the given texture unit. this is similar to
@@ -126,7 +126,7 @@ public interface IContext {
 	 * 
 	 * @param unit
 	 */
-	public void unbindTexture(int unit);
+	void unbindTexture(int unit);
 
 	/**
 	 * binds the given texture to the given rendertarget
@@ -135,14 +135,14 @@ public interface IContext {
 	 * @param handle
 	 * @return whether binding the target was successful
 	 */
-	public boolean bindRenderTarget(int target, int handle);
+	boolean bindRenderTarget(int target, int handle);
 
 	/**
 	 * Frees the given rendertarget from the current binding
 	 * 
 	 * @param target
 	 */
-	public void unbindRenderTarget(int target);
+	void unbindRenderTarget(int target);
 
 	// Shaders
 
@@ -154,7 +154,7 @@ public interface IContext {
 	 * @param fragmentshader
 	 * @return the handle of the Shaderprogram or 0 if no program was generated
 	 */
-	public int genShader(String vertexshader, String fragmentshader);
+	int genShader(String vertexshader, String fragmentshader);
 
 	/**
 	 * Destroys the given Shader and all its attached resources or does nothing
@@ -162,7 +162,7 @@ public interface IContext {
 	 * 
 	 * @param handle
 	 */
-	public void destroyShader(int handle);
+	void destroyShader(int handle);
 
 	/**
 	 * Binds the given shader for use
@@ -170,13 +170,13 @@ public interface IContext {
 	 * @param handle
 	 * @return whether the bind was successful
 	 */
-	public boolean bindShader(int handle);
+	boolean bindShader(int handle);
 
 	/**
 	 * Unbinds the currently active shader (simmilar to calling
 	 * {@link #bindShader(int)} using 0 as the handle)
 	 */
-	public void unbindShader();
+	void unbindShader();
 
 	/**
 	 * Generates a Map that maps uniform names of the given shader to their
@@ -185,7 +185,7 @@ public interface IContext {
 	 * @param handle
 	 * @return the generated Map or null if no shader with the given id exists
 	 */
-	public Map<String, Integer> getUniforms(int handle);
+	Map<String, Integer> getUniforms(int handle);
 
 	/**
 	 * Finds the location of a given uniform in the active shader
@@ -193,7 +193,7 @@ public interface IContext {
 	 * @param name
 	 * @return the location of the given uniform, -1 if it does not exist
 	 */
-	public int getUniformLocation(String name);
+	int getUniformLocation(String name);
 
 	/**
 	 * Binds the given integer to the given uniform of the currently active
@@ -203,7 +203,7 @@ public interface IContext {
 	 * @param value
 	 * @return whether binding the integer was successful
 	 */
-	public boolean setUniformInt(int location, int value);
+	boolean setUniformInt(int location, int value);
 
 	/**
 	 * Binds the given double to the given uniform of the currently active
@@ -213,17 +213,17 @@ public interface IContext {
 	 * @param value
 	 * @return whether binding the double was successful
 	 */
-	public boolean setUniformDouble(int location, double value);
+	boolean setUniformDouble(int location, double value);
 
 	/**
 	 * Binds the given texture to the given uniform (includes binding the
 	 * texture to a texture unit)
 	 * 
 	 * @param location
-	 * @param value
+	 * @param texture
 	 * @return whether binding the texture was successful
 	 */
-	public boolean setUniformTexture(int location, int texture);
+	boolean setUniformTexture(int location, int texture);
 
 	/**
 	 * Binds the given {@link Matrix33} to the given uniform of the currently
@@ -233,7 +233,7 @@ public interface IContext {
 	 * @param texture
 	 * @return whether binding the Matrix33 was successful
 	 */
-	public boolean setUniformMatrix(int location, Matrix33 texture);
+	boolean setUniformMatrix(int location, Matrix33 texture);
 
 	/**
 	 * Binds the given {@link Vector2D} to the given uniform of the currently
@@ -243,7 +243,7 @@ public interface IContext {
 	 * @param vector
 	 * @return whether binding the Vector2D was successful
 	 */
-	public boolean setUniformVector(int location, Vector2D vector);
+	boolean setUniformVector(int location, Vector2D vector);
 
 	// TODO method for uniform color
 
@@ -255,7 +255,7 @@ public interface IContext {
 	 * @param value
 	 * @return whether the operation was completed successfully
 	 */
-	public boolean setAttribute(String name, int value);
+	boolean setAttribute(String name, int value);
 
 	// Batches
 
@@ -266,7 +266,7 @@ public interface IContext {
 	 * @author Freddy
 	 *
 	 */
-	public enum ElementType {
+	enum ElementType {
 		/** An {@link ElementType} representing a float */
 		FLOAT(4),
 		/** An {@link ElementType} representing an integer */
@@ -304,7 +304,7 @@ public interface IContext {
 	 * @author Fredie
 	 *
 	 */
-	public enum VertexAttribute {
+	enum VertexAttribute {
 		/** Position vertex attribute */
 		POSITION("a_pos", ElementType.FLOAT, 2, false),
 
@@ -352,17 +352,14 @@ public interface IContext {
 		 * 
 		 * @param name
 		 *            the name it is represented by in the shader
-		 * @param fp
-		 *            whether the elements are floatingpoint numbers or not
-		 * @param esize
-		 *            the size in bytes of one element permitted are 1, 2, 4 and
-		 *            8
+		 * @param type
+		 *            the type of a single element of the VertexAttribute
 		 * @param ecount
 		 *            the count of elements in this
 		 * @param normalized
 		 *            whether elements in the attribute are normalized or not
 		 */
-		private VertexAttribute(String name, ElementType type, int ecount, boolean normalized) {
+		VertexAttribute(String name, ElementType type, int ecount, boolean normalized) {
 			mName = name;
 			mType = type;
 			mECount = ecount;
@@ -418,14 +415,15 @@ public interface IContext {
 	 * @param attributes
 	 * @return the created batch or null if the creation failed
 	 */
-	public IBatch genBatch(boolean isStatic, VertexAttribute... attributes);
+
+	IBatch genBatch(boolean isStatic, VertexAttribute... attributes);
 
 	/**
 	 * Destroys the given {@link IBatch} or does nothing if batch is null
 	 * 
 	 * @param batch
 	 */
-	public void destroyBatch(IBatch batch);
+	void destroyBatch(IBatch batch);
 
 	/**
 	 * Renders the given {@link IBatch} using the currently active shader
@@ -433,5 +431,5 @@ public interface IContext {
 	 * @param batch
 	 * @return whether rendering the batch was successful or not
 	 */
-	public boolean renderBatch(IBatch batch);
+	boolean renderBatch(IBatch batch);
 }

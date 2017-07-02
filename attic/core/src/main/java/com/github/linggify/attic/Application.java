@@ -8,6 +8,7 @@ import com.github.linggify.attic.exceptions.AtticRuntimeException;
 import com.github.linggify.attic.logic.Genius;
 import com.github.linggify.attic.render.IContext;
 import com.github.linggify.attic.render.Renderer;
+import com.github.linggify.attic.resources.ResourceManager;
 
 /**
  * The Application is the main component of the engine
@@ -26,6 +27,7 @@ public class Application {
 	private Stack<ViewState> mViewStates;
 	private Renderer mRenderer;
 	private IContext mContext;
+	private ResourceManager mResourceManager;
 
 	/**
 	 * Creates a new {@link Application} using the given {@link IBackend}
@@ -70,6 +72,9 @@ public class Application {
 		// init renderer
 		mContext = mWindow.getContext();
 		mRenderer = new Renderer(mContext);
+
+		//init resource manager
+		mResourceManager = new ResourceManager(this);
 
 		// init and start genius
 		mGenius = new Genius(mRenderer);
@@ -236,7 +241,7 @@ public class Application {
 		}
 
 		/**
-		 * @param mVSync
+		 * @param vSync
 		 *            whether v-sync shall be enabled
 		 */
 		public void setIsVSync(boolean vSync) {

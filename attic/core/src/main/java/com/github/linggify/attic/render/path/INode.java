@@ -14,26 +14,26 @@ public interface INode {
 	 * Sets the {@link IContext} for this {@link INode}.
 	 * @param helper
 	 */
-	public void setRenderHepler(IContext helper);
+	void setRenderHepler(IContext helper);
 
 	/**
 	 * Sets the input with the given name
 	 * @param name
 	 * @param input
 	 */
-	public void setInput(String name, Input input);
+	void setInput(String name, IInput input);
 	
 	/**
 	 * Prepares the {@link INode} for rendering a new frame,
 	 * this includes resetting all cached outputs
 	 */
-	public void prepare();
+	void prepare();
 	
 	/**
 	 * @param name
 	 * @return the id of the given output or -1 if no output with the given name exists
 	 */
-	public int getOutputId(String name);
+	int getOutputId(String name);
 	
 	/**
 	 * 
@@ -42,14 +42,14 @@ public interface INode {
 	 * @return the value of the given output
 	 * @throws AtticRuntimeException when the expected and actual type do not match
 	 */
-	public <T> T getOutput(int index, Class<T> type) throws AtticRuntimeException;
+	<T> T getOutput(int index, Class<T> type) throws AtticRuntimeException;
 	
 	/**
 	 * Inputs are providing data for {@link INode}s
 	 * @author Fredie
 	 *
 	 */
-	public interface Input {
+	interface IInput {
 		
 		/**
 		 * 
@@ -57,6 +57,6 @@ public interface INode {
 		 * @return the value of the input
 		 * @throws AtticRuntimeException when the Requested type does not match the actual Type of the value
 		 */
-		public <T> T getValue(Class<T> type) throws AtticRuntimeException;
+		<T> T getValue(Class<T> type) throws AtticRuntimeException;
 	}
 }

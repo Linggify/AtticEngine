@@ -1,14 +1,13 @@
 package com.github.linggify.attic.render.path;
 
 import com.github.linggify.attic.exceptions.AtticRuntimeException;
-import com.github.linggify.attic.render.path.INode.Input;
 
 /**
- * An OutputLinkInput is an {@link Input} that links a value of an output of another {@link INode}
+ * An OutputLinkInput is an {@link INode.IInput} that links a value of an output of another {@link INode}
  * @author Fredie
  *
  */
-public class OutputLinkInput implements Input {
+public class OutputLinkInput implements INode.IInput {
 
 	private INode mTarget;
 	private int mOutput;

@@ -10,22 +10,22 @@ public interface IBackend {
 	/**
 	 * Initializes the {@link IBackend}
 	 */
-	public void init();
+	void init();
 	
 	/**
 	 * Destroys all resources used by this {@link IBackend} making it unusable
 	 */
-	public void destroy();
+	void destroy();
 	
 	/**
 	 * 
 	 * @return a {@link IFileManager} to interface with the local file-system
 	 */
-	public IFileManager getFileManager();
+	IFileManager getFileManager();
 	
 	/**
 	 * Creates a new {@link IWindow} on the current Thread
 	 * @return the Window or <code>null</code> if creation has failed
 	 */
-	public IWindow createWindow();
+	IWindow createWindow();
 }

@@ -22,7 +22,7 @@ public class ClearTexturesNode implements INode{
 	
 	private boolean mCleared;
 	
-	private ArrayList<Pair<Input, Input>> mTargets;
+	private ArrayList<Pair<IInput, IInput>> mTargets;
 	
 	/**
 	 * Creates a new {@link ClearTexturesNode}
@@ -37,7 +37,7 @@ public class ClearTexturesNode implements INode{
 	}
 
 	@Override
-	public void setInput(String name, Input input) {
+	public void setInput(String name, IInput input) {
 		if(name.startsWith(TEXTURE_LINK)) {
 			int id = Integer.parseInt(name.split("_")[1]);
 			while(id >= mTargets.size()) mTargets.add(null);
@@ -81,7 +81,7 @@ public class ClearTexturesNode implements INode{
 				int tmpCount = count;
 				for(int i = 0; i < maxTargets && count < mTargets.size(); i++, count++) {
 					if(mTargets.get(count) != null) {
-						Pair<Input, Input> element = mTargets.get(count);
+						Pair<IInput, IInput> element = mTargets.get(count);
 						if(element.getKey() != null && element.getValue() != null) {
 							mContext.bindRenderTarget(i, element.getKey().getValue(Integer.class));
 							mContext.setClearColor(i, element.getValue().getValue(Color.class));

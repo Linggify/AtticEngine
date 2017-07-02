@@ -24,10 +24,10 @@ public class RenderLayerNode implements INode{
 
 	private IContext mHelper;
 	
-	private Input mShader;
-	private Input mLayer;
-	private Input mTarget;
-	private HashMap<String, Pair<Input, Class<?>>> mUniforms;
+	private IInput mShader;
+	private IInput mLayer;
+	private IInput mTarget;
+	private HashMap<String, Pair<IInput, Class<?>>> mUniforms;
 	
 	private boolean mMappingsDirty;
 	private Map<String, Integer> mUniformMappings;
@@ -49,7 +49,7 @@ public class RenderLayerNode implements INode{
 	 * @param input the input providing the info
 	 * @param type the type of info. Should be {@link Matrix33}, {@link Vector2D}, a {@link Number} otherwise it will be ignored
 	 */
-	public void setUniform(String name, Input input, Class<?> type) {
+	public void setUniform(String name, IInput input, Class<?> type) {
 		mUniforms.put(name, new Pair<>(input, type));
 	}
 	
@@ -59,7 +59,7 @@ public class RenderLayerNode implements INode{
 	}
 
 	@Override
-	public void setInput(String name, Input input) {
+	public void setInput(String name, IInput input) {
 		switch(name) {
 		case "Shader": mShader = input;
 			mMappingsDirty = true;
@@ -68,7 +68,7 @@ public class RenderLayerNode implements INode{
 			break;
 		case "Target": mTarget = input;
 			break;
-		default: throw new AtticRuntimeException("No Such Input " + name);
+		default: throw new AtticRuntimeException("No Such IInput " + name);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class RenderLayerNode implements INode{
 			}
 			
 			//set uniforms
-			for(Entry<String, Pair<Input, Class<?>>> entry : mUniforms.entrySet()) {
+			for(Entry<String, Pair<IInput, Class<?>>> entry : mUniforms.entrySet()) {
 				String uname = entry.getKey();
 				Class<?> utype = entry.getValue().getValue();
 				if(utype == Double.class)

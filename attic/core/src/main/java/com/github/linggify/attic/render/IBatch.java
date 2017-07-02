@@ -18,5 +18,5 @@ public interface IBatch {
 	 * @param property
 	 * @return true if the given Property was accepted
 	 */
-	public boolean accept(IProperty<RenderData> property);
+	boolean accept(IProperty<RenderData> property);
 }

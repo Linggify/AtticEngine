@@ -14,45 +14,45 @@ public interface IProperty<T> {
 	 * Adds a {@link PropertyListener} to this {@link IProperty}
 	 * @param listener
 	 */
-	public void addListener(PropertyListener listener);
+	void addListener(PropertyListener listener);
 	
 	/**
 	 * Removes the given {@link PropertyListener} from this {@link IProperty}
 	 * @param listener
 	 * @return whether the listener was successfully removed or not
 	 */
-	public boolean removeListener(PropertyListener listener);
+	boolean removeListener(PropertyListener listener);
 	
 	/**
 	 * Called when this {@link IProperty} is attached to an Entity
 	 * @param parent
 	 * @throws AtticRuntimeException when this {@link IProperty} is already attached to a different parent
 	 */
-	public void onAttach(Entity parent) throws AtticRuntimeException;
+	void onAttach(Entity parent) throws AtticRuntimeException;
 	
 	/**
 	 * Called when this {@link IProperty} is detached from its current parent
 	 * @throws AtticRuntimeException when the {@link IProperty} has not yet been attached to a parent
 	 */
-	public void onDetach() throws AtticRuntimeException;
+	void onDetach() throws AtticRuntimeException;
 	
 	/**
 	 * Sets whether this {@link IProperty} is active
 	 * @param flag
 	 */
-	public void setActive(boolean flag);
+	void setActive(boolean flag);
 	
 	/**
 	 * 
 	 * @return whether this {@link IProperty} is active
 	 */
-	public boolean isActive();
+	boolean isActive();
 	
 	/**
 	 * 
 	 * @return the type the value of this {@link IProperty} is
 	 */
-	public Class<T> getContentType();
+	Class<T> getContentType();
 	
 	/**
 	 * Updates the value of this {@link IProperty}
@@ -60,13 +60,13 @@ public interface IProperty<T> {
 	 * @param delta
 	 *            the time since the last update
 	 */
-	public void update(double delta);
+	void update(double delta);
 
 	/**
 	 * 
 	 * @return the current value of this {@link IProperty}
 	 */
-	public T get();
+	T get();
 
 	/**
 	 * An enumeration of possible property-events that need to be reported to
@@ -75,16 +75,16 @@ public interface IProperty<T> {
 	 * @author Fredie
 	 *
 	 */
-	public enum PropertyEvent {
-		/** Event called when a {@link Property} is added */
+	enum PropertyEvent {
+		/** Event called when a {@link IProperty} is added */
 		PROPERTY_ADDED,
-		/** Event called when a {@link Property} is changed */
+		/** Event called when a {@link IProperty} is changed */
 		PROPERTY_CHANGED,
-		/** Event called when a {@link Property} is removed */
+		/** Event called when a {@link IProperty} is removed */
 		PROPERTY_REMOVED,
-		/** Event called when a {@link Property} is disabled */
+		/** Event called when a {@link IProperty} is disabled */
 		PROPERTY_DISABLED,
-		/** Event called when a {@link Property} is enabled */
+		/** Event called when a {@link IProperty} is enabled */
 		PROPERTY_ENABLED;
 	}
 	
@@ -93,13 +93,13 @@ public interface IProperty<T> {
 	 * @author Fredie
 	 *
 	 */
-	public interface PropertyListener {
+	interface PropertyListener {
 		
 		/**
 		 * Called when a {@link IProperty} this {@link PropertyListener} listens to changes in some way
 		 * @param target
 		 * @param event
 		 */
-		public void onEvent(IProperty<?> target, PropertyEvent event);
+		void onEvent(IProperty<?> target, PropertyEvent event);
 	}
 }

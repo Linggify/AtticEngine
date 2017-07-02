@@ -15,21 +15,21 @@ public interface IView {
 	/**
 	 * Sets up the scene using the given {@link Genius}
 	 * 
-	 * @param genius
+	 * @param app
 	 * @param state
 	 *            the state of this {@link IView}
 	 */
-	public void setup(Application app, ViewState state);
+	void setup(Application app, ViewState state);
 
 	/**
 	 * Pauses this {@link IView}
 	 * 
-	 * @param last
+	 * @param next
 	 *            the {@link ViewState} of the View that is started next, to
 	 *            submit information to the upcoming View
 	 * @return all relevant information needed to resume the View as a ViewState
 	 */
-	public ViewState stop(ViewState next);
+	ViewState stop(ViewState next);
 
 	/**
 	 * ViewStates are used by the {@link Application} to remember the state of a
@@ -38,7 +38,7 @@ public interface IView {
 	 * @author Fredie
 	 *
 	 */
-	public class ViewState {
+	class ViewState {
 
 		private HashMap<String, Object> mProperties;
 
