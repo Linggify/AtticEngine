@@ -22,6 +22,7 @@ public class Application {
 
 	private IWindow mWindow;
 
+	private IFileManager mFiles;
 	private Genius mGenius;
 	private Stack<IView> mViewStack;
 	private Stack<ViewState> mViewStates;
@@ -55,6 +56,22 @@ public class Application {
 	}
 
 	/**
+	 *
+	 * @return the {@link IFileManager} used by this {@link Application}
+	 */
+	public IFileManager fileManager() {
+		return mFiles;
+	}
+
+	/**
+	 *
+	 * @return the {@link ResourceManager} used by this {@link Application}
+	 */
+	public ResourceManager resources() {
+		return mResourceManager;
+	}
+
+	/**
 	 * Launches this {@link Application}
 	 */
 	public void launch(ApplicationConfiguration config, IView root) {
@@ -76,6 +93,9 @@ public class Application {
 		//init resource manager
 		mResourceManager = new ResourceManager(this);
 
+		//init filemanager
+		mFiles = mBackend.getFileManager();
+
 		// init and start genius
 		mGenius = new Genius(mRenderer);
 		mGenius.start();
@@ -88,7 +108,7 @@ public class Application {
 
 		//if an exception arises during rendering, stop the application and print the log
 		try {
-			while (!mWindow.shouldClose()) {
+			while (!mWindow.shouldClose() && mGenius.isRunning()) {
 				mRenderer.render();
 				mWindow.postRender();
 			}
@@ -105,6 +125,13 @@ public class Application {
 		mWindow.destroy();
 
 		mBackend.destroy();
+	}
+
+	/**
+	 * Stops the {@link Application}
+	 */
+	public void stop() {
+		mWindow.setShouldClose(true);
 	}
 
 	/**

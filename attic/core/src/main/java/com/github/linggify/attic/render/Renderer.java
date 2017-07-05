@@ -116,7 +116,8 @@ public class Renderer {
 	 * Renders the current scene
 	 */
 	public void render() {
-		mRenderPath.pollFrame();
+		if(mRenderPath != null)
+			mRenderPath.pollFrame();
 	}
 
 	/**

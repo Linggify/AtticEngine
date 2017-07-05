@@ -1,0 +1,6 @@
+{
+  "shader": {
+    "vertexShader": "BasicShader.vert",
+    "fragmentShader": "BasicShader.frag"
+  }
+}

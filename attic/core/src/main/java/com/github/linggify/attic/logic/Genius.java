@@ -144,7 +144,7 @@ public class Genius {
 					while (!mLastTasks.isEmpty())
 						mLastTasks.remove(0).run();
 				}
-			} catch (AtticRuntimeException e) {
+			} catch (Exception e) {
 				mRunning = false;
 				e.printStackTrace();
 			}
@@ -158,7 +158,7 @@ public class Genius {
 	 */
 	public void stop() {
 		if (!isRunning())
-			throw new AtticRuntimeException("");
+			throw new AtticRuntimeException("Genius has already been stopped or not started");
 		mRunLock.writeLock().lock();
 		mRunning = false;
 		mRunLock.writeLock().unlock();

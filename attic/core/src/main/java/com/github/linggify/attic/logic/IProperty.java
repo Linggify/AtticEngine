@@ -11,7 +11,7 @@ import com.github.linggify.attic.exceptions.AtticRuntimeException;
 public interface IProperty<T> {
 
 	/**
-	 * Adds a {@link PropertyListener} to this {@link IProperty}
+	 * Adds a  {@link PropertyListener} to this {@link IProperty}
 	 * @param listener
 	 */
 	void addListener(PropertyListener listener);
